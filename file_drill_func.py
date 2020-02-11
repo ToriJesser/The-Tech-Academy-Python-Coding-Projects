@@ -41,8 +41,8 @@ def moveFile(self, directory, directory_1):
     local_time = time.ctime(modification_time)
     for filename in os.listdir(self.source):
             if filename.endswith(".txt"):
-                dest = shutil.move(os.path.join(self.source, filename), (os.path.join(self.destination, filename)))
-                abpath = (os.path.join(directory,filename))
+                shutil.move(os.path.join(self.source, filename), (os.path.join(self.destination, filename)))
+                abpath = (os.path.join(directory_1,filename))
                 print(filename, local_time)
                 addToDB(self, filename, local_time)
             else:
@@ -61,12 +61,10 @@ def create_db(self):
     conn.close()
     
 def addToDB(self, filename, local_time):
-    self.file = self.filename
-    self.time = self.local_time
     conn = sqlite3.connect('db_files.db')
     with conn:
         cur = conn.cursor()
-        cursor.execute("""INSERT INTO tbl_fileTime (col_filename, col_timestamp) VALUES (?,?)""",(self.file, self.time))
+        cur.execute("""INSERT INTO tbl_fileTime (col_filename, col_timestamp) VALUES (?,?)""",(filename, local_time))
         conn.commit()
     conn.close()
 

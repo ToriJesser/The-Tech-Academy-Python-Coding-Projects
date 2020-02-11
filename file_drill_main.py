@@ -32,8 +32,7 @@ class ParentWindow(Frame):
         
         # loads in the GUI widgets from a separate module
         file_drill_gui.load_gui(self)
-        self.file = self.filename
-        self.time = self.local_time
+        
 
 
 
